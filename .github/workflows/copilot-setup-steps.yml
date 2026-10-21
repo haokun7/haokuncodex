@@ -1,4 +1,4 @@
-name: Copilot Setup Steps
+name: "Copilot Setup Steps"
 
 on:
   workflow_dispatch:
@@ -18,21 +18,35 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          lfs: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
       - name: Install writing and presentation toolchain
         run: |
           sudo apt-get update
           sudo apt-get install -y \
+            git-lfs \
             pandoc \
             texlive-xetex \
             texlive-lang-chinese \
             fonts-noto-cjk \
             python3-pip
+          git lfs install
 
       - name: Install Python packages for document and PPT generation
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install \
+          python -m pip install --upgrade pip
+          python -m pip install \
             python-pptx \
             pypandoc \
             pymupdf \
@@ -40,6 +54,9 @@ jobs:
 
       - name: Verify key tools
         run: |
+          node --version
+          npm --version
           pandoc --version
           xelatex --version
-          python3 -c "import pptx, pypandoc, fitz, reportlab; print('python packages ok')"
+          python --version
+          python -c "import pptx, pypandoc, fitz, reportlab; print('python packages ok')"
