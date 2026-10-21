@@ -1,0 +1,8 @@
+.env
+.venv/
+node_modules/
+.Rhistory
+.Rproj.user/
+*.dta
+*.gph
+*.log

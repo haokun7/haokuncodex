@@ -1,0 +1,14 @@
+{
+  "name": "Codex Cloud Workspace",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {"version": "3.12"},
+    "ghcr.io/devcontainers/features/node:1": {"version": "22"},
+    "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {"version": "4.4"},
+    "ghcr.io/devcontainers-contrib/features/latex:2": {}
+  },
+  "postCreateCommand": "bash scripts/setup-tools.sh",
+  "containerEnv": {
+    "CODEX_SHARED_SKILLS": "/workspaces/codex-cloud-workspace/skills"
+  }
+}
